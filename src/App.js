@@ -52,7 +52,7 @@ class App extends Component {
     this.setState({ interval: value });
   };
 
-  renderCurrency() {}
+  renderCurrency() { }
 
   renderRatioForm() {
     const options = {
@@ -218,12 +218,22 @@ class App extends Component {
         minority: 1
       }
     };
+    const REINVEST = {
+      value: dataPointsInvestments[dataPointsInvestments.length - 1],
+      currency: {
+        code: "RUR",
+        minority: 1
+      }
+    };
 
     return (
       <div className="chart">
-        <Label>Разница в деньгах:</Label> <Amount amount={AMOUNT} />{" "}
-        <Label>{(percent * 100).toFixed(2)} %</Label>
-        <Line data={data} />
+        <Label>Разница в деньгах</Label> <Amount amount={AMOUNT} />{" "}
+        <Label>{(percent * 100).toFixed(2)} %</Label><br />
+        <Label>Получено за счет реинвестирования</Label>{" "}<Amount amount={REINVEST} /><br />
+        {window.innerWidth > 768 && (<div style={{ width: '100%', height: '100vh' }}>
+          <Line data={data} heigth={5000} />
+        </div>)}
       </div>
     );
   }
