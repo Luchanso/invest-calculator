@@ -9,7 +9,7 @@
     "react": "^16.0.0",
     "react-chartjs-2": "^2.6.4",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.17"
   },
   "homepage": "https://luchanso.github.com/invest-calculator",
   "scripts": {
