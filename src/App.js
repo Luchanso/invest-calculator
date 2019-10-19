@@ -17,7 +17,7 @@ const calculateData = (
   const pRate = Number(rate);
   const pInvestments = Number(investments);
   const pStartCapital = Number(startCapital);
-  const pIntervals = Number(intervals);
+  const pIntervals = Number(intervals) + 1;
   const dataPoints = [pStartCapital];
 
   for (let i = 1; i < pIntervals; i++) {
