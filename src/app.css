@@ -2,9 +2,20 @@
   margin: 25px;
 }
 
+.finance {
+  display: flex;
+}
+
+.finance .counter-block {
+  margin-left: 40px;
+}
+
 .form {
   width: 300px;
-  margin: 20px 0;
+}
+
+.form .input {
+  margin: 0 0 20px;
 }
 
 @media (max-width: 768px) {

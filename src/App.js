@@ -11,7 +11,7 @@ import { Counters } from "./Counters";
 
 const calculateData = (
   rate = 1,
-  investments,
+  investments = 0,
   startCapital = 0,
   intervals = 2
 ) => {
@@ -28,6 +28,9 @@ const calculateData = (
 
   return dataPoints;
 };
+
+const calculateDataFactory = (investments, startCapital, intervals) => rate =>
+  calculateData(rate, investments, startCapital, intervals);
 
 class App extends Component {
   state = {
@@ -63,11 +66,7 @@ class App extends Component {
       type: "number",
       width: "available"
     };
-    return (
-      <div className="form">
-        <Input {...options} />
-      </div>
-    );
+    return <Input {...options} />;
   }
 
   renderInvestments() {
@@ -78,11 +77,7 @@ class App extends Component {
       type: "number",
       width: "available"
     };
-    return (
-      <div className="form">
-        <Input {...options} />
-      </div>
-    );
+    return <Input {...options} />;
   }
 
   renderStartCapital() {
@@ -93,11 +88,7 @@ class App extends Component {
       type: "number",
       width: "available"
     };
-    return (
-      <div className="form">
-        <Input {...options} />
-      </div>
-    );
+    return <Input {...options} />;
   }
 
   renderInterval() {
@@ -108,46 +99,18 @@ class App extends Component {
       type: "number",
       width: "available"
     };
-    return (
-      <div className="form">
-        <Input {...options} />
-      </div>
-    );
+    return <Input {...options} />;
   }
 
-  renderChart() {
-    const { rate, investments, startCapital, interval } = this.state;
-
-    const dataPointsInvestments = calculateData(
-      rate,
-      investments,
-      startCapital,
-      interval
-    );
-    const dataPointsInvestmentsUp = calculateData(
-      rate * 0.75,
-      investments,
-      startCapital,
-      interval
-    );
-    const dataPointsInvestmentsDown = calculateData(
-      rate * 0.25,
-      investments,
-      startCapital,
-      interval
-    );
-    const dataPointsZero = calculateData(
-      0,
-      investments,
-      startCapital,
-      interval
-    );
-
-    const diff =
-      dataPointsInvestments[dataPointsInvestments.length - 1] -
-      dataPointsZero[dataPointsZero.length - 1];
-    const percent = diff / dataPointsZero[dataPointsZero.length - 1];
-
+  renderChart(
+    dataPoints0,
+    dataPoints25,
+    dataPoints75,
+    dataPoints100,
+    diff,
+    percent
+  ) {
+    const { interval }= this.state;
     const labels = [...Array(Math.max(1, interval)).keys()].map(
       item => item + 1
     );
@@ -177,17 +140,17 @@ class App extends Component {
           borderColor: "rgba(75,192,192,1)",
           pointBorderColor: "rgba(75,192,192,1)",
           pointHoverBackgroundColor: "rgba(75,192,192,1)",
-          data: dataPointsInvestments
+          data: dataPoints100
         },
         {
           ...baseStyle,
-          label: "Размер денег без инвестициями",
+          label: "Накопления под подушкой",
           backgroundColor: "rgba(244, 66, 72, 0.4)",
           borderColor: "rgb(244, 66, 72)",
           pointBorderColor: "rgb(244, 66, 72)",
           pointBackgroundColor: "#fff",
           pointHoverBackgroundColor: "rgb(244, 66, 72)",
-          data: dataPointsZero
+          data: dataPoints0
         },
         {
           ...baseStyle,
@@ -197,7 +160,7 @@ class App extends Component {
           pointBorderColor: "rgb(241, 244, 66)",
           pointBackgroundColor: "#fff",
           pointHoverBackgroundColor: "rgb(241, 244, 66)",
-          data: dataPointsInvestmentsUp
+          data: dataPoints75
         },
         {
           ...baseStyle,
@@ -207,7 +170,7 @@ class App extends Component {
           pointBorderColor: "rgb(119, 66, 244)",
           pointBackgroundColor: "#fff",
           pointHoverBackgroundColor: "rgb(119, 66, 244)",
-          data: dataPointsInvestmentsDown
+          data: dataPoints25
         }
       ]
     };
@@ -219,7 +182,7 @@ class App extends Component {
         minority: 1
       }
     };
-    const total = dataPointsInvestments[dataPointsInvestments.length - 1];
+    const total = dataPoints100[dataPoints100.length - 1];
     const REINVEST = {
       value: total,
       currency: {
@@ -235,9 +198,8 @@ class App extends Component {
         <br />
         <Label>Получено за счет реинвестирования</Label>{" "}
         <Amount amount={REINVEST} />
-        <Counters interval={interval} totalProfit={diff} />
         <br />
-        <div className='line-chart'>
+        <div className="line-chart">
           <Line data={data} heigth={5000} />
         </div>
       </div>
@@ -245,15 +207,45 @@ class App extends Component {
   }
 
   render() {
+    const { rate, investments, startCapital, interval } = this.state;
+
+    const calculateData = calculateDataFactory(
+      investments,
+      startCapital,
+      interval
+    );
+
+    const invest0 = calculateData(0);
+    const invest25 = calculateData(rate * 0.25);
+    const invest75 = calculateData(rate * 0.75);
+    const invest100 = calculateData(rate);
+
+    const diff = invest100[invest100.length - 1] - invest0[invest0.length - 1];
+    const percent = diff / invest0[invest0.length - 1];
+
     return (
       <ThemeProvider theme="alfa-on-color">
         <div className="app">
           <Heading size="xl">Калькулятор инвестиций</Heading>
-          {this.renderRatioForm()}
-          {this.renderInvestments()}
-          {this.renderStartCapital()}
-          {this.renderInterval()}
-          {this.renderChart()}
+          <div className='finance'>
+            <div className="form">
+              {this.renderRatioForm()}
+              {this.renderInvestments()}
+              {this.renderStartCapital()}
+              {this.renderInterval()}
+            </div>
+            <div className="counter-block">
+              <Counters interval={interval} totalProfit={diff} />
+            </div>
+          </div>
+          {this.renderChart(
+            invest0,
+            invest25,
+            invest75,
+            invest100,
+            diff,
+            percent
+          )}
         </div>
       </ThemeProvider>
     );
