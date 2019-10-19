@@ -1,27 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "aa7dbce066fb4c318f3ba9647f52dfce",
+    "revision": "97389163aab0abf0894b08a50415246b",
     "url": "/invest-calculator/index.html"
   },
   {
-    "revision": "773c79a4ed56aa281cea",
-    "url": "/invest-calculator/static/css/2.d5d22505.chunk.css"
+    "revision": "8bbb315cccaaecef381a",
+    "url": "/invest-calculator/static/css/3.d5d22505.chunk.css"
   },
   {
-    "revision": "0ac234ed4101f32691f7",
+    "revision": "cbe70a0f9f3f8ec6e1a6",
     "url": "/invest-calculator/static/css/main.86efc044.chunk.css"
   },
   {
-    "revision": "773c79a4ed56aa281cea",
-    "url": "/invest-calculator/static/js/2.19096e77.chunk.js"
+    "revision": "bd36acdc92809d8b795d",
+    "url": "/invest-calculator/static/js/2.8a4c6fd3.chunk.js"
   },
   {
-    "revision": "0ac234ed4101f32691f7",
-    "url": "/invest-calculator/static/js/main.d34e7550.chunk.js"
+    "revision": "8bbb315cccaaecef381a",
+    "url": "/invest-calculator/static/js/3.3857e952.chunk.js"
   },
   {
-    "revision": "a2eba633139b49d9770c",
-    "url": "/invest-calculator/static/js/runtime-main.59ccb2d0.js"
+    "revision": "cbe70a0f9f3f8ec6e1a6",
+    "url": "/invest-calculator/static/js/main.2e83d7d2.chunk.js"
+  },
+  {
+    "revision": "3a5e9923c61522ee9b3d",
+    "url": "/invest-calculator/static/js/runtime-main.978eada1.js"
   },
   {
     "revision": "9fdfa24f2ace08fd45da3821d1531479",
