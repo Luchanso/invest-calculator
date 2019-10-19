@@ -9,10 +9,12 @@
     "react": "16.10.2",
     "react-chartjs-2": "2.8.0",
     "react-dom": "16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "source-map-explorer": "^2.1.0"
   },
   "homepage": "https://luchanso.github.com/invest-calculator",
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",

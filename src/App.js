@@ -4,10 +4,10 @@ import Input from "arui-feather/input";
 import Heading from "arui-feather/heading";
 import ThemeProvider from "arui-feather/theme-provider";
 import Label from "arui-feather/label";
-import { Line } from "react-chartjs-2";
-
 import "./app.css";
 import { Counters } from "./Counters";
+
+let Line;
 
 const calculateData = (
   rate = 1,
@@ -39,6 +39,15 @@ class App extends Component {
     startCapital: 50000,
     interval: 12
   };
+
+  async componentDidMount() {
+    if (!App.reactChartJs2) {
+      const ChartJs = await import('react-chartjs-2');
+      Line = ChartJs.Line;
+
+      this.forceUpdate();
+    }
+  }
 
   handleRatioForm = value => {
     this.setState({ rate: value });
@@ -200,7 +209,9 @@ class App extends Component {
         <Amount amount={REINVEST} />
         <br />
         <div className="line-chart">
-          <Line data={data} heigth={5000} />
+        {
+          Line && <Line data={data} heigth={5000} />
+        }
         </div>
       </div>
     );
