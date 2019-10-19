@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2528562e2be0e6b659eb35f068608d47",
+    "revision": "aa7dbce066fb4c318f3ba9647f52dfce",
     "url": "/invest-calculator/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/invest-calculator/static/css/2.d5d22505.chunk.css"
   },
   {
-    "revision": "6c7bd203303d3beaa3d9",
+    "revision": "0ac234ed4101f32691f7",
     "url": "/invest-calculator/static/css/main.86efc044.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/invest-calculator/static/js/2.19096e77.chunk.js"
   },
   {
-    "revision": "6c7bd203303d3beaa3d9",
-    "url": "/invest-calculator/static/js/main.e957821c.chunk.js"
+    "revision": "0ac234ed4101f32691f7",
+    "url": "/invest-calculator/static/js/main.d34e7550.chunk.js"
   },
   {
     "revision": "a2eba633139b49d9770c",
