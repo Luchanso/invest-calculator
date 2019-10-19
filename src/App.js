@@ -7,6 +7,7 @@ import Label from "arui-feather/label";
 import { Line } from "react-chartjs-2";
 
 import "./app.css";
+import { Counters } from "./Counters";
 
 const calculateData = (
   rate = 1,
@@ -52,7 +53,7 @@ class App extends Component {
     this.setState({ interval: value });
   };
 
-  renderCurrency() { }
+  renderCurrency() {}
 
   renderRatioForm() {
     const options = {
@@ -164,8 +165,8 @@ class App extends Component {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-    }
+      pointHoverBorderColor: "rgba(220,220,220,1)"
+    };
     const data = {
       labels,
       datasets: [
@@ -218,8 +219,9 @@ class App extends Component {
         minority: 1
       }
     };
+    const total = dataPointsInvestments[dataPointsInvestments.length - 1];
     const REINVEST = {
-      value: dataPointsInvestments[dataPointsInvestments.length - 1],
+      value: total,
       currency: {
         code: "RUR",
         minority: 1
@@ -229,11 +231,15 @@ class App extends Component {
     return (
       <div className="chart">
         <Label>Разница в деньгах</Label> <Amount amount={AMOUNT} />{" "}
-        <Label>{(percent * 100).toFixed(2)} %</Label><br />
-        <Label>Получено за счет реинвестирования</Label>{" "}<Amount amount={REINVEST} /><br />
-        {window.innerWidth > 768 && (<div style={{ width: '100%', height: '100vh' }}>
+        <Label>{(percent * 100).toFixed(2)} %</Label>
+        <br />
+        <Label>Получено за счет реинвестирования</Label>{" "}
+        <Amount amount={REINVEST} />
+        <Counters interval={interval} totalProfit={diff} />
+        <br />
+        <div className='line-chart'>
           <Line data={data} heigth={5000} />
-        </div>)}
+        </div>
       </div>
     );
   }

@@ -1,0 +1,4 @@
+.counters {
+    display: flex;
+    flex-direction: column;
+}
